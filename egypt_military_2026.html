@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القوة العسكرية المصرية 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cinzel:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g1: #00ff41;
+    --g2: #00cc33;
+    --g3: #008822;
+    --g4: #004411;
+    --g5: #001a00;
+    --g6: #003300;
+    --glow: rgba(0,255,65,0.18);
+    --glow2: rgba(0,255,65,0.07);
+    --bg: #000a00;
+    --text: #c8ffda;
+    --text-dim: rgba(0,255,65,0.5);
+    --border: rgba(0,255,65,0.2);
+    --panel: rgba(0,15,0,0.75);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Tajawal', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.8;
+  }
+
+  /* ===== BACKGROUND ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,180,60,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(0,255,65,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse 30% 30% at 10% 60%, rgba(0,150,40,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* SCANLINES */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ===== MATRIX CANVAS ===== */
+  #matrixCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+
+  /* ===== PARTICLES ===== */
+  .particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--g1);
+    border-radius: 50%;
+    animation: float-p linear infinite;
+    opacity: 0;
+  }
+  @keyframes float-p {
+    0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    text-align: center;
+    padding: 7rem 0 5rem;
+    position: relative;
+  }
+
+  .hero-orb {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,200,60,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: orb-pulse 5s ease-in-out infinite;
+  }
+  @keyframes orb-pulse {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; }
+    50%      { transform: translate(-50%,-50%) scale(1.12); opacity: 1; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.45em;
+    color: var(--g2);
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.45s forwards;
+  }
+  .egypt-flag {
+    width: 72px; height: 44px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--g2);
+    box-shadow: 0 0 18px rgba(0,255,65,0.35);
+    display: flex; flex-direction: column;
+  }
+  .flag-r { background: #c8102e; flex:1; }
+  .flag-w { background: #fff; flex:1; display:flex; align-items:center; justify-content:center; font-size:11px; }
+  .flag-b { background: #111; flex:1; }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.4rem, 9vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #ffffff 0%, #a0ffb8 35%, var(--g1) 70%, var(--g2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 35px rgba(0,255,65,0.45));
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: rgba(180,255,200,0.7);
+    font-weight: 300;
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+  }
+  .badge {
+    background: rgba(0,255,65,0.07);
+    border: 1px solid rgba(0,255,65,0.3);
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--g1);
+    letter-spacing: 0.15em;
+    box-shadow: 0 0 12px rgba(0,255,65,0.1);
+  }
+  .badge.gold {
+    background: rgba(255,200,0,0.08);
+    border-color: rgba(255,200,0,0.4);
+    color: #ffd700;
+    box-shadow: 0 0 12px rgba(255,200,0,0.15);
+  }
+
+  .hero-line {
+    width: 220px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--g1), transparent);
+    margin: 2.5rem auto 0;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== INDEX GRID ===== */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .index-item {
+    background: rgba(0,40,0,0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .index-item:hover {
+    background: rgba(0,60,0,0.7);
+    border-color: rgba(0,255,65,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,255,65,0.12);
+  }
+  .index-item-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .index-item-name { font-size: 0.85rem; color: var(--g1); font-weight: 700; }
+  .index-item-type { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.25rem; letter-spacing: 0.05em; }
+
+  /* ===== SECTION ===== */
+  .section {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,255,65,0.18);
+    position: relative;
+  }
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: 0;
+    width: 40%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--g1));
+    animation: scan-h 4s ease-in-out infinite;
+  }
+  @keyframes scan-h {
+    0%,100% { opacity: 0.3; width: 20%; }
+    50%      { opacity: 1;   width: 60%; }
+  }
+
+  .section-icon {
+    width: 62px; height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0,120,40,0.4), rgba(0,60,15,0.3));
+    border: 1px solid rgba(0,255,65,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 22px rgba(0,200,60,0.25), inset 0 0 18px rgba(0,255,65,0.08);
+    animation: icon-glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes icon-glow {
+    from { box-shadow: 0 0 16px rgba(0,200,60,0.2), inset 0 0 12px rgba(0,255,65,0.06); }
+    to   { box-shadow: 0 0 30px rgba(0,255,65,0.4), inset 0 0 22px rgba(0,255,65,0.14); }
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    color: var(--g1);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 14px rgba(0,255,65,0.4);
+  }
+  .section-tag {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: linear-gradient(135deg, rgba(0,40,0,0.5) 0%, rgba(0,15,0,0.75) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    border-color: rgba(0,255,65,0.45);
+    box-shadow: 0 0 30px rgba(0,255,65,0.1);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(0,255,65,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,255,65,0.4), transparent);
+    animation: card-scan 5s ease-in-out infinite;
+  }
+  @keyframes card-scan {
+    0%,100% { opacity: 0.2; }
+    50%      { opacity: 0.7; }
+  }
+
+  .card p {
+    color: rgba(200,255,218,0.85);
+    font-size: 0.97rem;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--g1);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .card-title::before {
+    content: '';
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--g1);
+    box-shadow: 0 0 10px var(--g1);
+    flex-shrink: 0;
+    animation: dot-blink 2s ease-in-out infinite;
+  }
+  @keyframes dot-blink {
+    0%,100% { opacity: 1; box-shadow: 0 0 8px var(--g1); }
+    50%      { opacity: 0.4; box-shadow: none; }
+  }
+
+  /* ===== DATA TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4rem 0;
+    font-size: 0.92rem;
+  }
+  .data-table th {
+    background: rgba(0,80,20,0.4);
+    color: var(--g1);
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-align: right;
+    border-bottom: 1px solid rgba(0,255,65,0.3);
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(0,255,65,0.08);
+    color: rgba(200,255,218,0.85);
+  }
+  .data-table td:last-child {
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff99;
+    font-size: 0.88rem;
+  }
+  .data-table tr:hover td {
+    background: rgba(0,80,20,0.2);
+  }
+
+  /* ===== HIGHLIGHT ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(0,100,30,0.2), rgba(0,50,10,0.3));
+    border: 1px solid rgba(0,255,65,0.35);
+    border-right: 3px solid var(--g1);
+    border-radius: 8px;
+    padding: 1.1rem 1.5rem;
+    margin: 1.4rem 0;
+    font-size: 0.93rem;
+    color: var(--g1);
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(0,255,65,0.3);
+  }
+
+  /* ===== STAT BARS ===== */
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .stat-label {
+    min-width: 150px;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.3;
+  }
+  .stat-track {
+    flex: 1;
+    height: 7px;
+    background: rgba(0,80,20,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0,255,65,0.1);
+  }
+  .stat-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--g3), var(--g1));
+    box-shadow: 0 0 10px rgba(0,255,65,0.5);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+    animation: bar-glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes bar-glow {
+    from { box-shadow: 0 0 5px rgba(0,255,65,0.4); }
+    to   { box-shadow: 0 0 15px rgba(0,255,65,0.9); }
+  }
+  .stat-value {
+    min-width: 70px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.82rem;
+    color: #00ff99;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  /* ===== RANK CARD ===== */
+  .rank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .rank-item {
+    background: rgba(0,30,0,0.6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .rank-item:hover {
+    border-color: rgba(0,255,65,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,255,65,0.12);
+  }
+  .rank-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2rem;
+    color: #00ff99;
+    font-weight: bold;
+    text-shadow: 0 0 12px rgba(0,255,153,0.6);
+    line-height: 1;
+  }
+  .rank-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.4rem;
+    line-height: 1.4;
+  }
+
+  /* ===== READINESS TABLE ===== */
+  .ready-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 1rem;
+  }
+  .ready-table th {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    padding: 8px 6px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,255,65,0.15);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+  .ready-table td {
+    padding: 8px 6px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,255,65,0.06);
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .ready-table td:first-child {
+    text-align: right;
+    font-family: 'Tajawal', sans-serif;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  .col-s { color: #00ff99; }
+  .col-r { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.4); }
+  .col-k { color: rgba(0,255,65,0.45); font-size: 0.78rem; }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    text-align: center;
+    margin: 3.5rem 0;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%; width: 36%;
+    height: 1px;
+  }
+  .divider::before { right: 0; background: linear-gradient(90deg, transparent, rgba(0,255,65,0.3)); }
+  .divider::after  { left: 0;  background: linear-gradient(270deg, transparent, rgba(0,255,65,0.3)); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: rgba(0,255,65,0.25);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    font-family: 'Share Tech Mono', monospace;
+    border-top: 1px solid rgba(0,255,65,0.1);
+  }
+
+  /* ===== STATUS BAR ===== */
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 10px 20px;
+    background: rgba(0,15,0,0.8);
+    border: 1px solid rgba(0,255,65,0.15);
+    border-radius: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    background: var(--g1);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 6px;
+    box-shadow: 0 0 8px var(--g1);
+    animation: dot-blink 1s ease-in-out infinite;
+  }
+
+  /* ===== FLOW ===== */
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 1.2rem 0; }
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 0.7rem 0; position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 14px; top: 38px;
+    width: 1px; height: calc(100% - 8px);
+    background: linear-gradient(180deg, var(--g2), transparent);
+  }
+  .flow-dot {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,100,30,0.4);
+    border: 1px solid var(--g2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; color: var(--g1); flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0,200,60,0.25);
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .flow-text {
+    color: rgba(200,255,218,0.85);
+    font-size: 0.93rem;
+    padding-top: 0.35rem;
+    line-height: 1.7;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:620px) {
+    .container { padding: 0 1rem 4rem; }
+    .hero { padding: 5rem 0 3rem; }
+    .hero-title { font-size: 2.2rem; }
+    .index-grid { grid-template-columns: repeat(2,1fr); }
+    .rank-grid { grid-template-columns: repeat(3,1fr); }
+    .stat-label { min-width: 100px; font-size: 0.75rem; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+<div class="particles" id="particles"></div>
+
+<div class="container">
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <div class="hero-orb"></div>
+    <div class="hero-eyebrow">البيان الرسمي الكامل — globalfirepower.com</div>
+
+    <div class="hero-flag">
+      <div class="egypt-flag">
+        <div class="flag-r"></div>
+        <div class="flag-w">🦅</div>
+        <div class="flag-b"></div>
+      </div>
+    </div>
+
+    <h1 class="hero-title">القوة العسكرية المصرية</h1>
+
+    <p class="hero-subtitle">
+      تقرير شامل ومفصّل بالأرقام الرسمية — قوة أفريقية من الطراز الأول وضمن أفضل 20 جيشاً على مستوى العالم
+    </p>
+
+    <div class="hero-badges">
+      <div class="badge">🌍 الأولى أفريقياً</div>
+      <div class="badge gold">🏅 المرتبة 19 عالمياً / 145</div>
+      <div class="badge">PwrIndx: 0.3651</div>
+      <div class="badge">تحديث: يناير 2026</div>
+    </div>
+
+    <div class="hero-line"></div>
+
+    <div class="status-bar">
+      <span><span class="status-dot"></span> SYSTEM ONLINE</span>
+      <span>المصدر: GlobalFirepower.com</span>
+      <span>آخر تحديث: يناير 2026</span>
+      <span>145 دولة في التصنيف</span>
+    </div>
+  </div>
+
+  <!-- ======== INDEX ======== -->
+  <div class="section" id="s0">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <div class="section-title">فهرس أقسام التقرير</div>
+        <div class="section-tag">نظرة عامة شاملة على جميع الفئات</div>
+      </div>
+    </div>
+    <div class="index-grid">
+      <div class="index-item"><div class="index-item-icon">👥</div><div class="index-item-name">القوى البشرية</div><div class="index-item-type">الأفراد والتجنيد</div></div>
+      <div class="index-item"><div class="index-item-icon">✈️</div><div class="index-item-name">القوة الجوية</div><div class="index-item-type">الطائرات والمروحيات</div></div>
+      <div class="index-item"><div class="index-item-icon">🪖</div><div class="index-item-name">القوات البرية</div><div class="index-item-type">الدبابات والمدرعات</div></div>
+      <div class="index-item"><div class="index-item-icon">⚓</div><div class="index-item-name">القوة البحرية</div><div class="index-item-type">الأسطول والغواصات</div></div>
+      <div class="index-item"><div class="index-item-icon">💰</div><div class="index-item-name">الوضع المالي</div><div class="index-item-type">الميزانية والاحتياطي</div></div>
+      <div class="index-item"><div class="index-item-icon">🛢️</div><div class="index-item-name">الموارد الطبيعية</div><div class="index-item-type">النفط والغاز</div></div>
+      <div class="index-item"><div class="index-item-icon">🗺️</div><div class="index-item-name">الجغرافيا واللوجستيات</div><div class="index-item-type">البنية التحتية</div></div>
+      <div class="index-item"><div class="index-item-icon">⚔️</div><div class="index-item-name">التعبئة الحربية</div><div class="index-item-type">الاحتياط والتجنيد</div></div>
+      <div class="index-item"><div class="index-item-icon">🏅</div><div class="index-item-name">ملخص التصنيفات</div><div class="index-item-type">ترتيب مصر عالمياً</div></div>
+    </div>
+  </div>
+
+  <div class="divider">✦ القوى البشرية ✦</div>
+
+  <!-- ======== 1. MANPOWER ======== -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div>
+        <div class="section-title">القوى البشرية</div>
+        <div class="section-tag">السكان · التجنيد · الأفراد العسكريون</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">نظرة عامة</div>
+      <p>تمتلك مصر واحدة من أكبر وأضخم القواعد البشرية في المنطقة، إذ يُتيح تعداد سكانها الضخم البالغ أكثر من 111 مليون نسمة احتياطياً بشرياً هائلاً للتجنيد والتعبئة. الجيش المصري يُعدّ الأكبر في القارة الأفريقية والمنطقة العربية من حيث عدد الأفراد.</p>
+      <table class="data-table">
+        <tr><th>الفئة</th><th>العدد</th><th>الترتيب عالمياً</th></tr>
+        <tr><td>إجمالي السكان</td><td>111,247,248</td><td>#15 / 145</td></tr>
+        <tr><td>المتاحون للتجنيد</td><td>45,611,372</td><td>#16 / 145</td></tr>
+        <tr><td>المؤهلون للخدمة العسكرية</td><td>38,269,053</td><td>#15 / 145</td></tr>
+        <tr><td>يبلغون سن التجنيد سنوياً</td><td>1,668,709</td><td>#14 / 145</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تركيبة القوات المسلحة</div>
+      <table class="data-table">
+        <tr><th>الصنف</th><th>العدد</th><th>الترتيب</th></tr>
+        <tr><td>إجمالي العسكريين الكلي</td><td>1,217,500</td><td>—</td></tr>
+        <tr><td>الخدمة الفعلية النشطة</td><td>438,500</td><td>#13 / 145</td></tr>
+        <tr><td>قوات الاحتياط</td><td>479,000</td><td>#18 / 145</td></tr>
+        <tr><td>القوات شبه العسكرية</td><td>300,000</td><td>#7 / 145</td></tr>
+        <tr><td>أفراد سلاح الجو</td><td>50,000</td><td>#12 / 145</td></tr>
+        <tr><td>أفراد الجيش البري</td><td>685,000</td><td>#10 / 145</td></tr>
+        <tr><td>أفراد البحرية</td><td>50,000</td><td>#15 / 145</td></tr>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      "مصر في المرتبة #7 عالمياً في القوات شبه العسكرية — مما يُعطيها عمقاً دفاعياً هائلاً على أراضيها."
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — القوى البشرية</div>
+      <div class="stat-row"><div class="stat-label">الخدمة الفعلية #13</div><div class="stat-track"><div class="stat-fill" data-w="86"></div></div><div class="stat-value">438,500</div></div>
+      <div class="stat-row"><div class="stat-label">قوات الاحتياط #18</div><div class="stat-track"><div class="stat-fill" data-w="80"></div></div><div class="stat-value">479,000</div></div>
+      <div class="stat-row"><div class="stat-label">شبه عسكري #7</div><div class="stat-track"><div class="stat-fill" data-w="92"></div></div><div class="stat-value">300,000</div></div>
+      <div class="stat-row"><div class="stat-label">الجيش البري #10</div><div class="stat-track"><div class="stat-fill" data-w="89"></div></div><div class="stat-value">685,000</div></div>
+      <div class="stat-row"><div class="stat-label">سلاح الجو #12</div><div class="stat-track"><div class="stat-fill" data-w="87"></div></div><div class="stat-value">50,000</div></div>
+    </div>
+  </div>
+
+  <div class="divider">✦ القوة الجوية ✦</div>
+
+  <!-- ======== 2. AIRPOWER ======== -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-icon">✈️</div>
+      <div>
+        <div class="section-title">القوة الجوية</div>
+        <div class="section-tag">الطائرات · المروحيات · الجاهزية القتالية</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">المخزون والجاهزية (75% تقديراً)</div>
+      <table class="ready-table">
+        <thead>
+          <tr><th>الصنف</th><th>المخزون الكلي</th><th>الجاهز (75%)</th><th>الترتيب</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>إجمالي الطائرات</td><td class="col-s">1,088</td><td class="col-r">707</td><td class="col-k">#9</td></tr>
+          <tr><td>طائرات مقاتلة</td><td class="col-s">242</td><td class="col-r">157</td><td class="col-k">#10</td></tr>
+          <tr><td>طائرات هجومية</td><td class="col-s">90</td><td class="col-r">59</td><td class="col-k">#7</td></tr>
+          <tr><td>طائرات تدريب</td><td class="col-s">344</td><td class="col-r">224</td><td class="col-k">#6</td></tr>
+          <tr><td>طائرات نقل</td><td class="col-s">53</td><td class="col-r">34</td><td class="col-k">#13</td></tr>
+          <tr><td>مهام خاصة</td><td class="col-s">11</td><td class="col-r">7</td><td class="col-k">#21</td></tr>
+          <tr><td>ناقلات وقود جوية</td><td class="col-s">0</td><td class="col-r">0</td><td class="col-k">—</td></tr>
+          <tr><td>مروحيات (إجمالي)</td><td class="col-s">348</td><td class="col-r">226</td><td class="col-k">#11</td></tr>
+          <tr><td>مروحيات هجومية</td><td class="col-s">100</td><td class="col-r">65</td><td class="col-k">#7</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — القوة الجوية</div>
+      <div class="stat-row"><div class="stat-label">إجمالي الطائرات #9</div><div class="stat-track"><div class="stat-fill" data-w="93"></div></div><div class="stat-value">1,088</div></div>
+      <div class="stat-row"><div class="stat-label">مقاتلات #10</div><div class="stat-track"><div class="stat-fill" data-w="88"></div></div><div class="stat-value">242</div></div>
+      <div class="stat-row"><div class="stat-label">هجومية #7</div><div class="stat-track"><div class="stat-fill" data-w="91"></div></div><div class="stat-value">90</div></div>
+      <div class="stat-row"><div class="stat-label">تدريب #6</div><div class="stat-track"><div class="stat-fill" data-w="94"></div></div><div class="stat-value">344</div></div>
+      <div class="stat-row"><div class="stat-label">مروحيات كلي #11</div><div class="stat-track"><div class="stat-fill" data-w="87"></div></div><div class="stat-value">348</div></div>
+      <div class="stat-row"><div class="stat-label">مروحيات هجوم #7</div><div class="stat-track"><div class="stat-fill" data-w="91"></div></div><div class="stat-value">100</div></div>
+    </div>
+
+    <div class="highlight-box">
+      "سلاح الجو المصري في المرتبة #9 عالمياً من حيث إجمالي الطائرات — يفوق عشرات الدول الكبرى."
+    </div>
+  </div>
+
+  <div class="divider">✦ القوات البرية ✦</div>
+
+  <!-- ======== 3. LAND ======== -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-icon">🪖</div>
+      <div>
+        <div class="section-title">القوات البرية</div>
+        <div class="section-tag">الدبابات · المدرعات · المدفعية · الصواريخ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">المخزون والجاهزية (80% تقديراً)</div>
+      <table class="ready-table">
+        <thead>
+          <tr><th>الصنف</th><th>المخزون الكلي</th><th>الجاهز (80%)</th><th>الترتيب</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>الدبابات</td><td class="col-s">3,620</td><td class="col-r">2,534</td><td class="col-k">#6</td></tr>
+          <tr><td>المركبات المدرعة</td><td class="col-s">54,694</td><td class="col-r">38,286</td><td class="col-k">#17</td></tr>
+          <tr><td>مدفعية ذاتية الدفع</td><td class="col-s">1,056</td><td class="col-r">739</td><td class="col-k">#6</td></tr>
+          <tr><td>مدفعية مجرورة</td><td class="col-s">962</td><td class="col-r">673</td><td class="col-k">#12</td></tr>
+          <tr><td>منظومات صواريخ متعددة MLRS</td><td class="col-s">648</td><td class="col-r">454</td><td class="col-k">#11</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — القوات البرية</div>
+      <div class="stat-row"><div class="stat-label">الدبابات #6</div><div class="stat-track"><div class="stat-fill" data-w="94"></div></div><div class="stat-value">3,620</div></div>
+      <div class="stat-row"><div class="stat-label">المدرعات #17</div><div class="stat-track"><div class="stat-fill" data-w="84"></div></div><div class="stat-value">54,694</div></div>
+      <div class="stat-row"><div class="stat-label">مدفعية ذاتية #6</div><div class="stat-track"><div class="stat-fill" data-w="94"></div></div><div class="stat-value">1,056</div></div>
+      <div class="stat-row"><div class="stat-label">مدفعية مجرورة #12</div><div class="stat-track"><div class="stat-fill" data-w="87"></div></div><div class="stat-value">962</div></div>
+      <div class="stat-row"><div class="stat-label">MLRS #11</div><div class="stat-track"><div class="stat-fill" data-w="88"></div></div><div class="stat-value">648</div></div>
+    </div>
+
+    <div class="highlight-box">
+      "مصر في المرتبة #6 عالمياً في الدبابات والمدفعية ذاتية الدفع — تفوق دولاً كبرى كفرنسا وإيطاليا وتركيا."
+    </div>
+  </div>
+
+  <div class="divider">✦ القوة البحرية ✦</div>
+
+  <!-- ======== 4. NAVAL ======== -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-icon">⚓</div>
+      <div>
+        <div class="section-title">القوة البحرية</div>
+        <div class="section-tag">الأسطول البحري · الغواصات · حاملات المروحيات</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تفصيل الأسطول البحري</div>
+      <table class="data-table">
+        <tr><th>الصنف</th><th>العدد</th><th>الترتيب</th></tr>
+        <tr><td>إجمالي السفن الحربية</td><td>149</td><td>#23 / 145</td></tr>
+        <tr><td>الحمولة الإجمالية (طن)</td><td>235,989</td><td>#16 / 145</td></tr>
+        <tr><td>حاملات المروحيات (Mistral)</td><td>2</td><td>#4 / 145</td></tr>
+        <tr><td>الفرقاطات</td><td>13</td><td>#6 / 145</td></tr>
+        <tr><td>الكورفيت</td><td>7</td><td>#10 / 145</td></tr>
+        <tr><td>الغواصات</td><td>8</td><td>#11 / 145</td></tr>
+        <tr><td>سفن دورية وساحلية</td><td>61</td><td>#26 / 145</td></tr>
+        <tr><td>سفن مكافحة الألغام</td><td>17</td><td>#6 / 145</td></tr>
+        <tr><td>حاملات الطائرات</td><td>0</td><td>—</td></tr>
+        <tr><td>المدمرات</td><td>0</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">نقاط القوة البحرية البارزة</div>
+      <div class="flow">
+        <div class="flow-step"><div class="flow-dot">#4</div><div class="flow-text"><strong>حاملتا مروحيات Mistral الفرنسيتان</strong> — تُصنّف مصر رابعة عالمياً في هذا الصنف، مما يمنحها قدرة إنزال برمائي ضخمة.</div></div>
+        <div class="flow-step"><div class="flow-dot">#6</div><div class="flow-text"><strong>13 فرقاطة</strong> — أسطول فرقاطات ضخم يجعلها في المرتبة السادسة عالمياً، مجهزة بصواريخ حديثة متعددة.</div></div>
+        <div class="flow-step"><div class="flow-dot">#6</div><div class="flow-text"><strong>17 سفينة مكافحة ألغام</strong> — قدرة هائلة على حماية الممرات البحرية وقناة السويس.</div></div>
+        <div class="flow-step"><div class="flow-dot">#11</div><div class="flow-text"><strong>8 غواصات</strong> — تشمل الجيل الجديد من الغواصات الألمانية Type 209 وType 206.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — القوة البحرية</div>
+      <div class="stat-row"><div class="stat-label">حاملات المروحيات #4</div><div class="stat-track"><div class="stat-fill" data-w="96"></div></div><div class="stat-value">2 وحدة</div></div>
+      <div class="stat-row"><div class="stat-label">الفرقاطات #6</div><div class="stat-track"><div class="stat-fill" data-w="94"></div></div><div class="stat-value">13 وحدة</div></div>
+      <div class="stat-row"><div class="stat-label">مكافحة الألغام #6</div><div class="stat-track"><div class="stat-fill" data-w="94"></div></div><div class="stat-value">17 وحدة</div></div>
+      <div class="stat-row"><div class="stat-label">الغواصات #11</div><div class="stat-track"><div class="stat-fill" data-w="88"></div></div><div class="stat-value">8 وحدة</div></div>
+      <div class="stat-row"><div class="stat-label">الكورفيت #10</div><div class="stat-track"><div class="stat-fill" data-w="89"></div></div><div class="stat-value">7 وحدة</div></div>
+    </div>
+  </div>
+
+  <div class="divider">✦ الوضع المالي والموارد ✦</div>
+
+  <!-- ======== 5. FINANCE + RESOURCES ======== -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-icon">💰</div>
+      <div>
+        <div class="section-title">الوضع المالي والموارد الطبيعية</div>
+        <div class="section-tag">الميزانية · الاحتياطي · النفط · الغاز</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">المؤشرات المالية</div>
+      <table class="data-table">
+        <tr><th>المؤشر</th><th>القيمة</th><th>الترتيب</th></tr>
+        <tr><td>الناتج المحلي (تعادل القوة الشرائية PPP)</td><td>$1,958,000,000,000</td><td>#18 / 145</td></tr>
+        <tr><td>احتياطيات النقد الأجنبي والذهب</td><td>$44,921,000,000</td><td>#48 / 145</td></tr>
+        <tr><td>ميزانية الدفاع السنوية</td><td>$5,193,500,000</td><td>#56 / 145</td></tr>
+        <tr><td>الديون الخارجية</td><td>$117,272,000,000</td><td>#101 / 145</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">الموارد الطبيعية — النفط والغاز</div>
+      <table class="data-table">
+        <tr><th>المورد</th><th>القيمة</th><th>الترتيب</th></tr>
+        <tr><td>إنتاج النفط (برميل/يوم)</td><td>667,000</td><td>#26 / 145</td></tr>
+        <tr><td>استهلاك النفط (برميل/يوم)</td><td>830,000</td><td>#104 / 145</td></tr>
+        <tr><td>احتياطيات النفط المؤكدة (برميل)</td><td>3,300,000,000</td><td>#26 / 145</td></tr>
+        <tr><td>إنتاج الغاز الطبيعي (م³/سنة)</td><td>64,817,000,000</td><td>#13 / 145</td></tr>
+        <tr><td>استهلاك الغاز الطبيعي (م³/سنة)</td><td>60,100,000,000</td><td>#100 / 145</td></tr>
+        <tr><td>احتياطيات الغاز المؤكدة (م³)</td><td>1,784,000,000,000</td><td>#19 / 145</td></tr>
+        <tr><td>إنتاج الفحم (طن متري)</td><td>69,000</td><td>#72 / 145</td></tr>
+        <tr><td>احتياطيات الفحم (طن متري)</td><td>182,000,000</td><td>#62 / 145</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — المالية والموارد</div>
+      <div class="stat-row"><div class="stat-label">القوة الشرائية #18</div><div class="stat-track"><div class="stat-fill" data-w="87"></div></div><div class="stat-value">$1.96 تريليون</div></div>
+      <div class="stat-row"><div class="stat-label">ميزانية الدفاع #56</div><div class="stat-track"><div class="stat-fill" data-w="62"></div></div><div class="stat-value">$5.19 مليار</div></div>
+      <div class="stat-row"><div class="stat-label">إنتاج الغاز #13</div><div class="stat-track"><div class="stat-fill" data-w="87"></div></div><div class="stat-value">64.8 مليار م³</div></div>
+      <div class="stat-row"><div class="stat-label">إنتاج النفط #26</div><div class="stat-track"><div class="stat-fill" data-w="74"></div></div><div class="stat-value">667,000 ب/ي</div></div>
+    </div>
+  </div>
+
+  <div class="divider">✦ الجغرافيا واللوجستيات ✦</div>
+
+  <!-- ======== 6. GEO ======== -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="section-icon">🗺️</div>
+      <div>
+        <div class="section-title">الجغرافيا والبنية التحتية اللوجستية</div>
+        <div class="section-tag">المساحة · الطرق · الموانئ · المطارات</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">البيانات الجغرافية واللوجستية</div>
+      <table class="data-table">
+        <tr><th>المؤشر</th><th>القيمة</th><th>الترتيب</th></tr>
+        <tr><td>المساحة البرية (كم²)</td><td>1,001,450</td><td>#29 / 145</td></tr>
+        <tr><td>الشريط الساحلي (كم)</td><td>2,450</td><td>#68 / 145</td></tr>
+        <tr><td>الحدود البرية المشتركة (كم)</td><td>2,612</td><td>#64 / 145</td></tr>
+        <tr><td>الممرات المائية الداخلية (كم)</td><td>3,500</td><td>#32 / 145</td></tr>
+        <tr><td>المطارات الصالحة للاستخدام</td><td>73</td><td>#60 / 145</td></tr>
+        <tr><td>شبكة الطرق البرية (كم)</td><td>65,050</td><td>#76 / 145</td></tr>
+        <tr><td>شبكة السكك الحديدية (كم)</td><td>5,085</td><td>#38 / 145</td></tr>
+        <tr><td>الأسطول التجاري البحري (سفينة)</td><td>441</td><td>#38 / 145</td></tr>
+        <tr><td>الموانئ ومحطات التجارة</td><td>31</td><td>#23 / 145</td></tr>
+        <tr><td>قوة العمل الإجمالية</td><td>33,749,000</td><td>#20 / 145</td></tr>
+        <tr><td>التغطية الإنترنت</td><td>73.0%</td><td>#25 / 145</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">الميزة الاستراتيجية الكبرى — قناة السويس</div>
+      <p>تتحكم مصر في قناة السويس، أحد أهم الشرايين التجارية والعسكرية في العالم، مما يمنحها نفوذاً استراتيجياً بالغ الأثر يتجاوز أرقام القوة العسكرية المباشرة. هذا الموقع الجيوسياسي الفريد يجعلها لاعباً محورياً لا يمكن تجاهله في أي معادلة إقليمية أو دولية.</p>
+      <div class="highlight-box">
+        "من يسيطر على السويس يسيطر على ممر الشرق — وهذا ما تمتلكه مصر حصراً."
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">✦ التعبئة الحربية التقديرية ✦</div>
+
+  <!-- ======== 7. MOBILIZATION ======== -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="section-icon">⚔️</div>
+      <div>
+        <div class="section-title">التعبئة الحربية التقديرية</div>
+        <div class="section-tag">الطاقة الاستيعابية في حالة الحرب الشاملة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">التراكم القتالي عبر الزمن</div>
+      <p>في حالة حرب شاملة، تستطيع مصر تعبئة ملايين المقاتلين بشكل تدريجي. الجدول التالي يُظهر القوة التراكمية للجيش المصري في حالة التعبئة الكاملة.</p>
+      <table class="data-table">
+        <tr><th>المرحلة الزمنية</th><th>إجمالي المقاتلين</th></tr>
+        <tr><td>الوضع الراهن (نشط + احتياط)</td><td>1,217,500</td></tr>
+        <tr><td>إضافة تجنيد 6–12 شهراً</td><td>834,355</td></tr>
+        <tr><td>الإجمالي بعد 6–12 شهراً</td><td>2,051,855</td></tr>
+        <tr><td>الإجمالي التراكمي السنة الثانية</td><td>3,337,595</td></tr>
+        <tr><td>الإجمالي التراكمي السنة الثالثة</td><td>5,361,350</td></tr>
+        <tr><td>الإجمالي التراكمي السنة الرابعة+</td><td>7,808,070</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">تصور بصري — التعبئة التدريجية</div>
+      <div class="stat-row"><div class="stat-label">الوضع الراهن</div><div class="stat-track"><div class="stat-fill" data-w="16"></div></div><div class="stat-value">1.2 مليون</div></div>
+      <div class="stat-row"><div class="stat-label">بعد 6–12 شهراً</div><div class="stat-track"><div class="stat-fill" data-w="26"></div></div><div class="stat-value">2 مليون</div></div>
+      <div class="stat-row"><div class="stat-label">السنة الثانية</div><div class="stat-track"><div class="stat-fill" data-w="43"></div></div><div class="stat-value">3.3 مليون</div></div>
+      <div class="stat-row"><div class="stat-label">السنة الثالثة</div><div class="stat-track"><div class="stat-fill" data-w="68"></div></div><div class="stat-value">5.4 مليون</div></div>
+      <div class="stat-row"><div class="stat-label">السنة الرابعة+</div><div class="stat-track"><div class="stat-fill" data-w="100"></div></div><div class="stat-value">7.8 مليون</div></div>
+    </div>
+  </div>
+
+  <div class="divider">✦ ملخص التصنيفات العالمية ✦</div>
+
+  <!-- ======== 8. RANKINGS ======== -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="section-icon">🏅</div>
+      <div>
+        <div class="section-title">ملخص التصنيفات العالمية</div>
+        <div class="section-tag">مصر مقارنة بـ 145 دولة حول العالم</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">أفضل التصنيفات المصرية عالمياً</div>
+      <div class="rank-grid">
+        <div class="rank-item"><div class="rank-num">#1</div><div class="rank-label">القوة العسكرية أفريقياً</div></div>
+        <div class="rank-item"><div class="rank-num">#4</div><div class="rank-label">حاملات المروحيات</div></div>
+        <div class="rank-item"><div class="rank-num">#6</div><div class="rank-label">الدبابات</div></div>
+        <div class="rank-item"><div class="rank-num">#6</div><div class="rank-label">مدفعية ذاتية الدفع</div></div>
+        <div class="rank-item"><div class="rank-num">#6</div><div class="rank-label">الفرقاطات البحرية</div></div>
+        <div class="rank-item"><div class="rank-num">#6</div><div class="rank-label">سفن مكافحة الألغام</div></div>
+        <div class="rank-item"><div class="rank-num">#7</div><div class="rank-label">القوات شبه العسكرية</div></div>
+        <div class="rank-item"><div class="rank-num">#7</div><div class="rank-label">الطائرات الهجومية</div></div>
+        <div class="rank-item"><div class="rank-num">#7</div><div class="rank-label">المروحيات الهجومية</div></div>
+        <div class="rank-item"><div class="rank-num">#9</div><div class="rank-label">إجمالي الطائرات</div></div>
+        <div class="rank-item"><div class="rank-num">#11</div><div class="rank-label">الغواصات</div></div>
+        <div class="rank-item"><div class="rank-num">#13</div><div class="rank-label">الغاز الطبيعي (إنتاج)</div></div>
+        <div class="rank-item"><div class="rank-num">#13</div><div class="rank-label">الأفراد العسكريون الفعليون</div></div>
+        <div class="rank-item"><div class="rank-num">#18</div><div class="rank-label">القوة الشرائية GDP</div></div>
+        <div class="rank-item"><div class="rank-num">#19</div><div class="rank-label">التصنيف العام العالمي</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">مقارنة إقليمية — مصر مقابل جيرانها</div>
+      <table class="data-table">
+        <tr><th>الدولة</th><th>التصنيف العالمي</th><th>PwrIndx</th></tr>
+        <tr><td>🇪🇬 مصر</td><td>#19</td><td>0.3651</td></tr>
+        <tr><td>🇹🇷 تركيا</td><td>#8</td><td>0.1697</td></tr>
+        <tr><td>🇮🇱 إسرائيل</td><td>#17</td><td>0.3476</td></tr>
+        <tr><td>🇸🇦 السعودية</td><td>#22</td><td>0.4129</td></tr>
+        <tr><td>🇮🇷 إيران</td><td>#14</td><td>0.2948</td></tr>
+        <tr><td>🇩🇿 الجزائر</td><td>#28</td><td>0.4627</td></tr>
+        <tr><td>🇲🇦 المغرب</td><td>#56</td><td>0.8017</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    ■ &nbsp; GLOBALFIREPOWER.COM — 2026 ANNUAL DEFENSE REVIEW &nbsp; ■<br><br>
+    البيانات مصدرها globalfirepower.com — بعضها تقديري وفق منهجية الموقع<br>
+    مصر: القوة العسكرية الأفريقية الأولى والمرتبة 19 عالمياً من أصل 145 دولة<br><br>
+    © 2026 — تقرير إعلامي للمعلومات العامة
+  </div>
+
+</div><!-- /container -->
+
+<script>
+/* ===== MATRIX RAIN ===== */
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+const fontSize = 13;
+let cols, drops;
+function initDrops() {
+  cols = Math.floor(canvas.width / fontSize);
+  drops = Array.from({length: cols}, () => Math.random() * -80);
+}
+initDrops();
+window.addEventListener('resize', initDrops);
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*ابتثجحخدذرزسشصضطظعغفقكلمنهوي←→↑↓█▓▒░';
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(0,5,0,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < cols; i++) {
+    const ch = chars[Math.floor(Math.random() * chars.length)];
+    const b = Math.random();
+    ctx.fillStyle = b > 0.97 ? '#ffffff' : b > 0.75 ? '#00ff41' : '#006622';
+    ctx.font = fontSize + 'px Share Tech Mono, monospace';
+    ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i] += 0.5;
+  }
+}
+setInterval(drawMatrix, 45);
+
+/* ===== PARTICLES ===== */
+const pc = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    width:${Math.random()*2+1}px;
+    height:${Math.random()*2+1}px;
+    animation-duration:${Math.random()*20+10}s;
+    animation-delay:${Math.random()*15}s;
+    --drift:${(Math.random()-0.5)*120}px;
+    opacity:0;
+  `;
+  pc.appendChild(p);
+}
+
+/* ===== SCROLL REVEAL ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+/* ===== ANIMATE BARS ===== */
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.stat-fill').forEach(b => {
+        setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.card').forEach(c => barObserver.observe(c));
+
+/* ===== TYPING EFFECT TITLE ===== */
+const title = document.querySelector('.hero-title');
+const text = title.textContent;
+title.textContent = '';
+let i = 0;
+function type() {
+  if (i < text.length) { title.textContent += text[i++]; setTimeout(type, 55); }
+}
+setTimeout(type, 700);
+</script>
+</body>
+</html>
